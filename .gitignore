@@ -1,10 +1,17 @@
 /.venv/
 __pycache__/
 .pytest_cache/
+pytest-cache-files-*/
 *.pyc
 warehouse/*.duckdb
 dbt_project/target/
 dbt_project/logs/
 dbt_project/dbt_packages/
+dbt_project/.user.yml
 .streamlit/
+.tmp/
+data/quarantine/
+graphify-out/
+reports/gx_latest.json
+reports/latest_metrics.json
 .DS_Store

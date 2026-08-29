@@ -67,6 +67,23 @@ Dashboard:
 make dashboard
 ```
 
+### Windows without CLI executables on `PATH`
+
+The repository includes Python entry-point wrappers, so the complete flow also
+works from PowerShell when `dbt.exe`/`pytest.exe` are not discoverable:
+
+```powershell
+python scripts\reset_lab.py
+python scripts\run_baseline.py
+python -m pytest tests_public tests_student -q
+python scripts\sync_dbt_seeds.py
+python scripts\run_dbt.py build --project-dir dbt_project --profiles-dir dbt_project
+python gx\validate_orders.py
+```
+
+See `docs/SUBMISSION.md` for implemented controls, required explanations and
+reproducible evidence.
+
 ## 3. Starter code đã có gì?
 
 - Bộ **synthetic sample data** đi kèm, không cần tải dataset ngoài.

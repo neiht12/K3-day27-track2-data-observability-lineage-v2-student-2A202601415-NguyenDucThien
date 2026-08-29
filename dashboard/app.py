@@ -12,7 +12,7 @@ HISTORY = ROOT / "data" / "history" / "metrics_history.csv"
 
 st.set_page_config(page_title="Data Reliability Lab", layout="wide")
 st.title("Data Reliability Game Day")
-st.caption("Starter dashboard - improve it only if it helps incident decisions.")
+st.caption("Decision-focused contract, anomaly, SLO and lineage signals.")
 
 if not REPORT.exists():
     st.warning("Run `make baseline` first to generate reports/latest_metrics.json")
@@ -29,8 +29,12 @@ c4.metric("Critical failures", report["critical_contract_failures"])
 st.subheader("Current signals")
 st.json({
     "row_count_anomaly": report["row_count_anomaly"],
+    "orders_validation_action": report.get("orders_validation_action"),
+    "kb_failed_contract_checks": report.get("kb_failed_contract_checks"),
+    "kb_validation_action": report.get("kb_validation_action"),
     "kb_text_length_signal": report["kb_text_length_signal"],
     "contract_slo": report["contract_slo"],
+    "kb_freshness_slo": report.get("kb_freshness_slo"),
 })
 
 history = pd.read_csv(HISTORY)
@@ -40,4 +44,4 @@ st.line_chart(history.set_index("date")[["row_count"]])
 st.subheader("Example blast radius")
 st.write("stg_orders -> " + " -> ".join(report["sample_blast_radius_from_stg_orders"]))
 
-st.info("TODO: add SLO target, remaining error budget, burn-rate windows, owner/runbook links, and incident status.")
+st.info("Runbook: block critical contract failures; quarantine stale KB batches; page only on sustained multi-window burn.")

@@ -2,6 +2,9 @@ dataset: orders
 owner: commerce-data
 freshness:
   column: updated_at
+  # Event-time reference keeps fixture replays deterministic. Remove this key
+  # in production to compare the latest update with wall-clock UTC.
+  reference_column: created_at
   max_delay_minutes: 30
   severity: warning
 columns:

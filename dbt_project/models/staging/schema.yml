@@ -21,9 +21,15 @@ models:
           - accepted_values:
               arguments:
                 values: ['pending', 'completed', 'refunded', 'cancelled']
+      - name: amount_usd
+        data_tests:
+          - not_null
 
   - name: stg_customers
     columns:
       - name: customer_id
+        data_tests:
+          - not_null
+      - name: is_active
         data_tests:
           - not_null
